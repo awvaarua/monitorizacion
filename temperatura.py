@@ -1,4 +1,33 @@
-import Adafruit_DHT, sys, os, urllib2, json
+##Instalacion dependencias externas
+password = "fura4468AB\n"
+
+def restart():
+    import sys, os
+    python = sys.executable
+    os.execl(python, python, * sys.argv)
+
+try:
+    import Adafruit_DHT
+    print "Paquete importado"
+except ImportError:
+	print "Instalando..."
+	import os
+	from subprocess import Popen, PIPE
+	process = Popen(['sudo', 'git', 'clone', 'https://github.com/adafruit/Adafruit_Python_DHT.git'])
+	process.communicate(password)
+	process.wait()
+	process = Popen(['sudo', 'python', 'Adafruit_Python_DHT/setup.py', 'install'])
+	output = process.communicate(password)
+	process.wait()
+	print output
+	process = Popen(['sudo', 'rm', '-R', 'Adafruit_Python_DHT'])
+	process.communicate(password)
+	process.wait()
+	print "Instalado"
+	restart()
+
+
+import sys, os, urllib2, json
 from time import sleep
 from threading import Thread
 from uuid import getnode as get_mac
