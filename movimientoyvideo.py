@@ -31,6 +31,7 @@ def Record_Video(duracion):
         picx.stop_recording()
         picx.stop_preview()
         picx.close()
+    sendVideo();
 
 def Movimiento_Infrarojos(espera_nuevo_aviso, duracion_video):
         while True:
