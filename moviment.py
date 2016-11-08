@@ -6,7 +6,7 @@ GPIO.setmode(GPIO.BCM)
 PIN_MOVIMIENTO = int(sys.argv[1])
 GPIO.setup(PIN_MOVIMIENTO, GPIO.IN)
 
-url = "http://192.168.2.105:8080/data/add"
+url = "http://192.168.2.238:8080/data/add"
 data = {
         "fichero": os.path.basename(__file__),
         "mac": get_mac()

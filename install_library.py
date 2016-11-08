@@ -13,5 +13,5 @@ except ImportError:
     process = Popen(['sudo', '-H', 'pip', 'install', 'requests'])
     process.communicate(password)
     process.wait()
-    print "Instalado requests"
+    print "Instalando requests"
     restart()
