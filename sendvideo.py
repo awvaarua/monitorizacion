@@ -1,18 +1,12 @@
-import urllib2, json, time, sys, os, time, requests, picamera
+import urllib2, json, time, sys, os, time, requests, picamera, threading
 from uuid import getnode as get_mac
-import threading, RPi.GPIO as GPIO
-
-GPIO.setmode(GPIO.BCM)
-PIN_MOVIMIENTO = int(sys.argv[1])
-GPIO.setup(PIN_MOVIMIENTO, GPIO.IN)
 
 url = 'http://192.168.2.238:8080/data/'+str(get_mac())+'/video'
 data = {
         "fichero": os.path.basename(__file__),
         "mac": get_mac()
         }
-espera_nuevo_aviso = float(sys.argv[2])
-duracion_video = float(sys.argv[3])
+duracion_video = float(sys.argv[1])
 
 def sendVideo():
     from subprocess import Popen, PIPE
@@ -32,16 +26,7 @@ def Record_Video(duracion):
         picx.stop_preview()
         picx.close()
     sendVideo();
-
-def Movimiento_Infrarojos(espera_nuevo_aviso, duracion_video):
-        while True:
-                if GPIO.input(PIN_MOVIMIENTO):
-                        time.sleep(0.5)
-                        Record_Video(duracion_video)
-                        time.sleep(espera_nuevo_aviso)
-                else:
-                        time.sleep(1)
                         
 
 if __name__ == "__main__":
-        Movimiento_Infrarojos(espera_nuevo_aviso, duracion_video)
+        Record_Video(duracion_video)

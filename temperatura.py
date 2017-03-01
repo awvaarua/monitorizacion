@@ -37,7 +37,7 @@ pin = int(sys.argv[1])
 frec = float(sys.argv[2])*60
 if frec < 60:
 	frec = 60
-url = "http://192.168.2.105:8080/data/add"
+url = "http://192.168.2.238:8080/data/add"
 data = {"fichero": os.path.basename(__file__), "mac": get_mac(), "valor": ""}
 
 def Send(value):
